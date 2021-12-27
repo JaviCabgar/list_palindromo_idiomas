@@ -1,0 +1,38 @@
+# abrimos un archivo que ya existe
+x=input('que archivo quieres usar para este ejercicio ? ')
+
+# separamos el texto en palabras str para trabajar con ellas
+f = open (x + '.txt','r',encoding="utf-8")
+for linea in f:
+    palabra_estudio_orig = linea.strip()
+
+    # para no tener en cuenta los acentos ni dieresis
+    a,b = 'áàéèìíóòùúü','aaeeiioouuu'
+    trans = str.maketrans(a,b)
+    palabra_estudio = palabra_estudio_orig.translate(trans)
+
+    # condicionantes y metodo
+    if len(palabra_estudio) == 1:
+        print (palabra_estudio_orig)
+    elif len(palabra_estudio) == 2:
+        if palabra_estudio[0] == palabra_estudio[-1]:
+            print(palabra_estudio_orig)
+    else:
+        def es_palindromo(palabra):
+            inicial=palabra
+            def primera(palabra):
+                return palabra[0]
+            def ultima(palabra):
+                return palabra[-1]
+            def medio(palabra):
+                return palabra[1:-1]
+            while medio(palabra)!='':
+                if primera(palabra)==ultima(palabra):
+                    palabra=medio(palabra)
+                else:
+                    return
+            if primera(palabra)==ultima(palabra):
+                print(palabra_estudio_orig)
+        es_palindromo(palabra_estudio)
+    
+f.close()
